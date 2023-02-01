@@ -8,7 +8,9 @@ import { mobile } from '../responsive'
 import StripeCheckout from 'react-stripe-checkout'
 import { useEffect, useState } from 'react'
 import { userRequest } from '../requestMethods'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { deleteProduct } from '../redux/cartRedux'
 
 const KEY = process.env.REACT_APP_KEY
 
@@ -161,6 +163,7 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
+
   const [stripeToken, setStripeToken] = useState(null)
   const navigate = useNavigate()
 
@@ -183,6 +186,14 @@ const Cart = () => {
     }
     stripeToken && makeRequest()
   }, [stripeToken, cart.total, navigate])
+
+  const handleAlert = () => {
+    alert('Functionality coming soon!')
+  }
+  // const handleRemove = () => {
+  //   dispatch(deleteProduct(pro))
+  // }
+
   return (
     <Container>
       <Navbar />
@@ -190,12 +201,16 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <Link to='/'>
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type='filled'>CHECKOUT NOW</TopButton>
+          <TopButton type='filled' onClick={handleAlert}>
+            CHECKOUT NOW
+          </TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -248,7 +263,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
+            {/* <StripeCheckout
               name='Lama Shop'
               image='https://avatars.githubusercontent.com/u/1486366?v=4'
               billingAddress
@@ -257,9 +272,9 @@ const Cart = () => {
               amount={cart.total * 100}
               token={onToken}
               stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+            > */}
+            <Button onClick={handleAlert}>CHECKOUT NOW</Button>
+            {/* </StripeCheckout> */}
           </Summary>
         </Bottom>
       </Wrapper>
