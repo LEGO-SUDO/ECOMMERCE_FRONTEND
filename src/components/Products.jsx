@@ -19,8 +19,8 @@ const Products = ({ cat, filters, sort }) => {
       try {
         const res = await axios.get(
           cat
-            ? `http://localhost:8080/api/product?category=${cat}`
-            : 'http://localhost:8080/api/product'
+            ? `https://lyntra-api-k9nb.onrender.com/api/product?category=${cat}`
+            : 'https://lyntra-api-k9nb.onrender.com/api/product'
         )
         setProducts(res.data)
       } catch (err) {}
