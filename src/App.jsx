@@ -7,21 +7,24 @@ import Cart from './pages/Cart'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Success from './pages/Success'
 import { useSelector } from 'react-redux'
+import ScrollToTop from './ScrollToTop'
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
   return (
     <Router>
-      <Routes>
-        <Route path='/'>
-          <Route index element={<Home />} />
-          <Route path='/products/:category' element={<ProductList />} />
-          <Route path='/product/:id' element={<Product />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/success' element={<Success />} />
-          <Route path='/login' element={user ? <Home /> : <Login />} />
-          <Route path='/register' element={user ? <Home /> : <Register />} />
-        </Route>
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path='/'>
+            <Route index element={<Home />} />
+            <Route path='/products/:category' element={<ProductList />} />
+            <Route path='/product/:id' element={<Product />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/success' element={<Success />} />
+            <Route path='/login' element={user ? <Home /> : <Login />} />
+            <Route path='/register' element={user ? <Home /> : <Register />} />
+          </Route>
+        </Routes>
+      </ScrollToTop>
     </Router>
   )
 }
