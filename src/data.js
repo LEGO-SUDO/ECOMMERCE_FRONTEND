@@ -1,11 +1,11 @@
 export const sliderItems = [
   {
     id: 1,
-    img: 'https://i.ibb.co/DG69bQ4/2.png',
+    img: 'https://live.staticflickr.com/65535/52664644068_7abbb468ab_c.jpg',
 
-    title: 'SUMMER SALE',
+    title: 'WINTER SALE',
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: 'f5fafd',
+    bg: 'white',
   },
   {
     id: 2,

@@ -80,6 +80,11 @@ const Navbar = () => {
     dispatch(logOut())
     navigate('/login')
   }
+  const handleCart = () => {
+    {
+      user ? navigate('/cart') : alert('LOGIN TO VIEW CART!')
+    }
+  }
   return (
     <Container>
       <Wrapper>
@@ -105,13 +110,12 @@ const Navbar = () => {
               <MenuItem>LOGIN</MenuItem>
             </Link>
           )}
-          <Link to='/cart'>
-            <MenuItem>
-              <Badge badgeContent={quantity} color='primary'>
-                <ShoppingCartOutlined />
-              </Badge>
-            </MenuItem>
-          </Link>
+
+          <MenuItem>
+            <Badge badgeContent={quantity} color='primary'>
+              <ShoppingCartOutlined onClick={handleCart} />
+            </Badge>
+          </MenuItem>
         </Right>
       </Wrapper>
     </Container>
