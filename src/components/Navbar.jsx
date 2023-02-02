@@ -4,7 +4,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { mobile } from '../responsive'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logOut } from '../redux/userRedux'
 
 const Container = styled.div`
   height: 60px;
@@ -69,8 +71,15 @@ const MenuItem = styled.div`
 `
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user.currentUser)
   const quantity = useSelector((state) => state.cart.quantity)
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const handleLogout = async (e) => {
+    e.preventDefault()
+    dispatch(logOut())
+    navigate('/login')
+  }
   return (
     <Container>
       <Wrapper>
@@ -85,13 +94,17 @@ const Navbar = () => {
           <Logo>LYNTRA</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <Link
-            to='/login'
-            style={{ textDecoration: 'none', color: 'inherit' }}
-          >
-            <MenuItem>SIGN IN</MenuItem>
-          </Link>
+          <MenuItem>{user ? '' : 'REGISTER'}</MenuItem>
+          {user ? (
+            <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+          ) : (
+            <Link
+              to='/login'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <MenuItem>LOGIN</MenuItem>
+            </Link>
+          )}
           <Link to='/cart'>
             <MenuItem>
               <Badge badgeContent={quantity} color='primary'>
